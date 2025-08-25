@@ -1,7 +1,7 @@
 {
   "name": "auction-based-e-commerce-platform",
   "version": "1.0.0",
-  "type":"module",
+  "type": "module",
   "description": "A Web-Based E-Commerce System Incorporating Auctions for Dynamic Pricing",
   "main": "server.js",
   "scripts": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/AuroBhuyan/Auction-Based-E-Commerce-Platform#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "colors": "^1.4.0",
     "colours": "^0.6.0-2",
     "dotenv": "^17.2.1",
