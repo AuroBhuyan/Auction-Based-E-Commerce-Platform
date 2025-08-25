@@ -1,0 +1,31 @@
+{
+  "name": "auction-based-e-commerce-platform",
+  "version": "1.0.0",
+  "type":"module",
+  "description": "A Web-Based E-Commerce System Incorporating Auctions for Dynamic Pricing",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AuroBhuyan/Auction-Based-E-Commerce-Platform.git"
+  },
+  "keywords": [],
+  "author": "AuroBhuyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AuroBhuyan/Auction-Based-E-Commerce-Platform/issues"
+  },
+  "homepage": "https://github.com/AuroBhuyan/Auction-Based-E-Commerce-Platform#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "colours": "^0.6.0-2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.10"
+  }
+}
