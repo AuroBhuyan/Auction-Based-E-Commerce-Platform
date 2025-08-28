@@ -9,3 +9,8 @@ Security → don’t hardcode secrets like DB passwords or API keys in your code
 # bcrypt is a library for hashing passwords.
 
 Hashing = turning your password into a scrambled string so it’s safe to store in the database.
+
+# react-router-dom
+
+
+# SEO using react-helmet
