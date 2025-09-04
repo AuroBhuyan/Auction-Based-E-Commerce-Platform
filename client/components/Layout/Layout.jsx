@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import {Helmet} from 'react-helmet'
+import { ToastContainer} from 'react-toastify';
 
 const Layout = ({children,title,description,author,keywords}) => {
   return (
@@ -14,7 +15,9 @@ const Layout = ({children,title,description,author,keywords}) => {
     </Helmet>
     <div className='min-h-screen flex flex-col'>
       <Header/>
-       <main className='flex-1 px-6 sm:px-8 md:px-12 pt-16'>{children}</main> 
+       <main className='flex-1 px-6 sm:px-8 md:px-12 pt-16'>
+        <ToastContainer/>
+        {children}</main> 
      <Footer/>
     </div>
     </>

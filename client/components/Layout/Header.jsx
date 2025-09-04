@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../context/auth.jsx";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const [auth, setAuth] = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const handleLogout = () =>{
+    setAuth({
+      ...auth,
+      user:null,
+      token:"",
+    });
+    localStorage.removeItem("auth");
+    toast.success("logout Successfully");
+  }
 
   return (
     <nav className="bg-transparent h-14 fixed top-0 left-0 w-full z-50">
@@ -49,86 +61,78 @@ const Navbar = () => {
           }`}
         >
           {/* Main Links */}
-          <li className="relative group">
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                `px-2 py-1 relative z-10 transition-colors duration-300 ${
-                  isActive
-                    ? "text-green-700 font-semibold"
-                    : "text-gray-800 hover:text-green-600"
-                }`
-              }
-            >
-              About
-            </NavLink>
-            <span className="absolute inset-0 rounded-md bg-lime-100 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-0"></span>
-          </li>
+          {[
+            { name: "About", path: "/about" },
+            { name: "Services", path: "/services" },
+            { name: "Contact", path: "/contact" },
+          ].map((link) => (
+            <li key={link.name} className="relative group">
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  `px-2 py-1 relative z-10 transition-colors duration-300 ${
+                    isActive
+                      ? "text-green-700 font-semibold"
+                      : "text-gray-800 hover:text-green-600"
+                  }`
+                }
+              >
+                {link.name}
+              </NavLink>
+              <span className="absolute inset-0 rounded-md bg-lime-100 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-0"></span>
+            </li>
+          ))}
 
-          <li className="relative group">
-            <NavLink
-              to="/services"
-              className={({ isActive }) =>
-                `px-2 py-1 relative z-10 transition-colors duration-300 ${
-                  isActive
-                    ? "text-green-700 font-semibold"
-                    : "text-gray-800 hover:text-green-600"
-                }`
-              }
-            >
-              Services
-            </NavLink>
-            <span className="absolute inset-0 rounded-md bg-lime-100 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-0"></span>
-          </li>
+          {/* Auth Links (Conditionally Rendered) */}
+          {!auth?.user ? (
+            <>
+              <li className="relative group">
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    `px-2 py-1 relative z-10 transition-colors duration-300 ${
+                      isActive
+                        ? "text-green-700 font-semibold"
+                        : "text-gray-800 hover:text-green-600"
+                    }`
+                  }
+                >
+                  Login
+                </NavLink>
+                <span className="absolute inset-0 rounded-md bg-lime-100 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-0"></span>
+              </li>
 
-          <li className="relative group">
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                `px-2 py-1 relative z-10 transition-colors duration-300 ${
-                  isActive
-                    ? "text-green-700 font-semibold"
-                    : "text-gray-800 hover:text-green-600"
-                }`
+              <li className="relative group">
+                <NavLink
+                  to="/register"
+                  className={({ isActive }) =>
+                    `px-2 py-1 relative z-10 transition-colors duration-300 ${
+                      isActive
+                        ? "text-green-700 font-semibold"
+                        : "text-gray-800 hover:text-green-600"
+                    }`
+                  }
+                >
+                  Register
+                </NavLink>
+                <span className="absolute inset-0 rounded-md bg-lime-100 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-0"></span>
+              </li>
+            </>
+          ) : (
+            <>
+              {/* Future Logout Button (Not implemented yet) */}
+              {
+              <li className="relative group">
+                <button
+                  onClick={handleLogout}
+                  className="px-2 py-1 text-gray-800 hover:text-red-600 transition-colors duration-300"
+                >
+                  Logout
+                </button>
+              </li>
               }
-            >
-              Contact
-            </NavLink>
-            <span className="absolute inset-0 rounded-md bg-lime-100 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-0"></span>
-          </li>
-
-          {/* Auth Links */}
-          <li className="relative group">
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                `px-2 py-1 relative z-10 transition-colors duration-300 ${
-                  isActive
-                    ? "text-green-700 font-semibold"
-                    : "text-gray-800 hover:text-green-600"
-                }`
-              }
-            >
-              Login
-            </NavLink>
-            <span className="absolute inset-0 rounded-md bg-lime-100 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-0"></span>
-          </li>
-
-          <li className="relative group">
-            <NavLink
-              to="/register"
-              className={({ isActive }) =>
-                `px-2 py-1 relative z-10 transition-colors duration-300 ${
-                  isActive
-                    ? "text-green-700 font-semibold"
-                    : "text-gray-800 hover:text-green-600"
-                }`
-              }
-            >
-              Register
-            </NavLink>
-            <span className="absolute inset-0 rounded-md bg-lime-100 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-0"></span>
-          </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>

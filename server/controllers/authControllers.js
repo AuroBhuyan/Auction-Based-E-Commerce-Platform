@@ -7,23 +7,23 @@ const registerController = async (req, res) => {
   try {
     const { name, email, password, phone, role } = req.body;
     if (!name) {
-      return res.send({ error: "name is Rwquired" });
+      return res.send({ message: "name is Rwquired" });
     }
     if (!email) {
-      return res.send({ error: "Email is Rwquired" });
+      return res.send({ message: "Email is Rwquired" });
     }
     if (!password) {
-      return res.send({ error: "password is Rwquired" });
+      return res.send({ message: "password is Rwquired" });
     }
     if (!phone) {
-      return res.send({ error: "phone is Rwquired" });
+      return res.send({ message: "phone is Rwquired" });
     }
 
     //existing user
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
       return res.status(200).send({
-        success: true,
+        success: false,
         message: "Already registered",
       });
     }

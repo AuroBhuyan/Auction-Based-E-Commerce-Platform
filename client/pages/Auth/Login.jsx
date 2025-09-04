@@ -1,21 +1,54 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import Button from "../../components/Button";
+import { useAuth } from "../../context/auth";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
 
+  // update form data when typing
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  // actual login API call
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login Submitted", formData);
-    // Add your API call or login logic here
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/auth/login",
+        formData
+      );
+      if (res && res.data.success) {
+        toast.success(res.data.message);
+
+        // ✅ update context with full auth object
+        const updatedAuth = {
+          ...auth,
+          user: res.data.user,
+          token: res.data.token,
+        };
+        setAuth(updatedAuth);
+
+        // ✅ save same object to localStorage
+        localStorage.setItem("auth", JSON.stringify(updatedAuth));
+
+        navigate("/");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
   };
 
   return (
@@ -57,9 +90,7 @@ const Login = () => {
             />
           </div>
 
-          <Button type="submit">
-            Login
-          </Button>
+          <Button type="submit">Login</Button>
         </form>
       </div>
     </Layout>

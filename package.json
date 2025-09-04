@@ -5,8 +5,10 @@
   "description": "A Web-Based E-Commerce System Incorporating Auctions for Dynamic Pricing",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js"
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "npm run dev --prefix ./client",
+    "dev": "concurrently \"npm run server \" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -23,11 +25,14 @@
     "bcrypt": "^6.0.0",
     "colors": "^1.4.0",
     "colours": "^0.6.0-2",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0",
     "morgan": "^1.10.1",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "react-redux": "^9.2.0"
   }
 }

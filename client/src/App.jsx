@@ -11,6 +11,7 @@ import Contact from "../pages/Contact";
 import PagenotFound from "../pages/PagenotFound";
 import Register from "../pages/Auth/Register";
 import Login from "../pages/Auth/Login";
+import { toast } from 'react-toastify';
 
 const App = () => {
   return (

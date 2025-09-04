@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import Button from "../../components/Button";
- // import your Button component
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// import your Button component
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,10 +20,21 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted", formData);
-    // Add your API call or registration logic here
+    toast.success("Registered successfully");
+    try {
+      const res = await axios.post("http://localhost:8080/api/auth/register",formData);
+      if (res.data.success) {
+        toast.success(res.data.message);
+        navigate("/login");
+      } else {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something Went Wrong");
+    }
   };
 
   return (
@@ -89,9 +105,7 @@ const Register = () => {
           </div>
 
           {/* Use your reusable Button component */}
-          <Button type="submit">
-            Register
-          </Button>
+          <Button type="submit">Register</Button>
         </form>
       </div>
     </Layout>
