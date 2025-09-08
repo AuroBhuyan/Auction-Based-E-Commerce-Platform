@@ -6,15 +6,15 @@ import { toast } from "react-toastify";
 const Navbar = () => {
   const [auth, setAuth] = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const handleLogout = () =>{
+  const handleLogout = () => {
     setAuth({
       ...auth,
-      user:null,
-      token:"",
+      user: null,
+      token: "",
     });
     localStorage.removeItem("auth");
     toast.success("logout Successfully");
-  }
+  };
 
   return (
     <nav className="bg-transparent h-14 fixed top-0 left-0 w-full z-50">
@@ -83,6 +83,25 @@ const Navbar = () => {
             </li>
           ))}
 
+          {/* Dashboard Link (for logged-in users) */}
+          {auth?.user && (
+            <li className="relative group">
+              <NavLink
+                to={`/dashboard/${auth.user.role === 1 ? "admin" : "user"}`}
+                className={({ isActive }) =>
+                  `px-2 py-1 relative z-10 transition-colors duration-300 ${
+                    isActive
+                      ? "text-green-700 font-semibold"
+                      : "text-gray-800 hover:text-green-600"
+                  }`
+                }
+              >
+                Dashboard
+              </NavLink>
+              <span className="absolute inset-0 rounded-md bg-lime-100 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-0"></span>
+            </li>
+          )}
+
           {/* Auth Links (Conditionally Rendered) */}
           {!auth?.user ? (
             <>
@@ -120,8 +139,6 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              {/* Future Logout Button (Not implemented yet) */}
-              {
               <li className="relative group">
                 <button
                   onClick={handleLogout}
@@ -130,7 +147,6 @@ const Navbar = () => {
                   Logout
                 </button>
               </li>
-              }
             </>
           )}
         </ul>
