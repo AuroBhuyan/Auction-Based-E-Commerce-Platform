@@ -40,3 +40,5 @@ The fix is to run the effect only once on mount, so it loads the data from local
 You do that by using an empty dependency array [], like this:
 
 ## private route
+
+## outlet from react-router for nested routing in dashboard
