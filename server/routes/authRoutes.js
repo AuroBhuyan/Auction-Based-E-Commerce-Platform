@@ -19,9 +19,11 @@ router.post("/login", loginController);
 //Dummy
 router.get("/test", requireSignIn, isAdmin, testController);
 
-//admin route auth
+// admin route auth
 router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
+  console.log("✅ /admin-auth route reached for user:", req.user);
   res.status(200).send({ ok: true });
 });
+
 
 export default router;
