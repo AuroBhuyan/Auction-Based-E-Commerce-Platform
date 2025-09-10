@@ -14,6 +14,8 @@ import Login from "../pages/Auth/Login";
 import { toast } from "react-toastify";
 import AdminRoute from "../components/Routes/AdminRoute.jsx";
 import AdminDashboard from "../pages/Admin/AdminDashboard";
+import PrivateRoute from "../components/Routes/PrivateRoute.jsx";
+import Dashboard from "../pages/User/Dashboard.jsx";
 
 const App = () => {
   return (
@@ -23,6 +25,9 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
+        </Route>
+        <Route path="/dashboard" element={<PrivateRoute />}>
+          <Route path="user" element={<Dashboard />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

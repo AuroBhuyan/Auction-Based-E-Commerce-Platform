@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../Spinner";
 
-export default function AdminRoute() {
+export default function PrivateRoute() {
   const [ok, setOk] = useState(null); // null means "loading"
   const [auth] = useAuth();
 
@@ -16,7 +16,7 @@ export default function AdminRoute() {
       }
 
       try {
-        const res = await axios.get("/api/auth/admin-auth", {
+        const res = await axios.get("/api/auth/user-auth", {
           headers: {
             Authorization: `Bearer ${auth.token}`,
           },
