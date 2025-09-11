@@ -16,6 +16,8 @@ import AdminRoute from "../components/Routes/AdminRoute.jsx";
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import PrivateRoute from "../components/Routes/PrivateRoute.jsx";
 import Dashboard from "../pages/User/Dashboard.jsx";
+import Orders from "../pages/User/Orders";
+import Profile from "../pages/User/Profile";
 
 const App = () => {
   return (
@@ -28,6 +30,8 @@ const App = () => {
         </Route>
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />
+          <Route path="user/orders" element={<Orders />} />
+          <Route path="user/profile" element={<Profile />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
