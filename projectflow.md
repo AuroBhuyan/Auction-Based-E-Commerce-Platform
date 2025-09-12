@@ -42,3 +42,5 @@ You do that by using an empty dependency array [], like this:
 ## private route
 
 ## outlet from react-router for nested routing in dashboard
+
+##slugify
