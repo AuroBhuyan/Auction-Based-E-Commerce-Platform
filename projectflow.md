@@ -43,4 +43,9 @@ You do that by using an empty dependency array [], like this:
 
 ## outlet from react-router for nested routing in dashboard
 
-##slugify
+## slugify
+
+## express-formidable
+
+
+# ** photo handling issue in productmodel
